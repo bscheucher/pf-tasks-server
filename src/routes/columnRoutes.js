@@ -11,7 +11,7 @@ const router = express.Router();
 
 router.post("/add/:boardId", authenticateToken, addColumn);
 router.get("/:boardId", authenticateToken, fetchColumns);
-router.put("/:id", authenticateToken, updateColumn);
+router.put("/update/:id", authenticateToken, updateColumn);
 router.delete("/delete/:id", authenticateToken, deleteColumn);
 
 export default router;

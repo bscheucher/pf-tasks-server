@@ -9,8 +9,8 @@ import {
 
 const router = express.Router();
 
-router.get("/", authenticateToken, getBoards);
-router.post("/add", authenticateToken, addBoard);
+router.get("/:userId", authenticateToken, getBoards);
+router.post("/add/:userId", authenticateToken, addBoard);
 router.put("/update/:id", modifyBoard);
 router.delete("/delete/:id", removeBoard);
 

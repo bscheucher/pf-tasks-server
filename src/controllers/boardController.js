@@ -6,20 +6,37 @@ import {
 } from "../services/boardService.js";
 
 export const getBoards = async (req, res) => {
-  console.log("getBoards called. User ID:", req.user.id);
+  const { userId } = req.params;
+  console.log(`[getBoards] Called for user ID: ${userId}`);
+
+  if (!userId) {
+    return res.status(400).json({ error: "User ID is required." });
+  }
+
   try {
-    const boards = await findBoards(req.user.id);
+    const boards = await findBoards(userId);
+    if (!boards || boards.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No boards found for this user." });
+    }
     res.json(boards);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    console.error(`[getBoards] Error fetching boards for user ${userId}:`, err);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
 export const addBoard = async (req, res) => {
-  console.log("createBoards called. User ID:", req.user.id);
+  const {userId} = req.params;
+  console.log(`[addBoard] Called for user ID: ${userId}`);
+
+  if (!userId) {
+    return res.status(400).json({ error: "User ID is required." });
+  }
   const { name } = req.body;
   try {
-    const board = await createBoard(req.user.id, name);
+    const board = await createBoard(userId, name);
     res.status(201).json(board);
   } catch (err) {
     res.status(400).json({ error: err.message });

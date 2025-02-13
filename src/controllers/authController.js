@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export const registerUser = async (req, res) => {
-    console.log("Register User is called");
+  console.log("Register User is called");
   const { username, email, password } = req.body;
 
   if (!username || !email || !password) {
@@ -94,6 +94,7 @@ export const login = (req, res, next) => {
 // Update a user's information
 export const updateUser = async (req, res) => {
   const id = parseInt(req.params.id, 10);
+  console.log("updateUser called, user ID:", id);
 
   if (isNaN(id)) {
     return res.status(400).send("Invalid user ID.");
