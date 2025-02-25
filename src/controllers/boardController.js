@@ -16,9 +16,7 @@ export const getBoards = async (req, res) => {
   try {
     const boards = await findBoards(userId);
     if (!boards || boards.length === 0) {
-      return res
-        .status(201)
-        .json({ message: "No boards found for this user." }, []);
+      return res.status(404).json({ message: "No boards found for this user." });
     }
     res.json(boards);
   } catch (err) {
@@ -26,6 +24,7 @@ export const getBoards = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
 
 export const addBoard = async (req, res) => {
   const { userId } = req.params;
