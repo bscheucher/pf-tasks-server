@@ -8,6 +8,6 @@ const router = express.Router();
 router.use("/auth", authRoutes);
 router.use("/boards", boardRoutes);
 router.use("/columns", columnRoutes);
-router.use("/routes", taskRoutes);
+router.use("/tasks", taskRoutes);
 
 export default router;

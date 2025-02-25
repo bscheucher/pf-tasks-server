@@ -29,6 +29,7 @@ export const addColumn = async (req, res) => {
 export const updateColumn = async (req, res) => {
   const { id } = req.params;
   const { title, position } = req.body;
+  console.log("col to upd", req.body);
   try {
     const column = await modifyColumn(id, title, position);
     res.json(column);

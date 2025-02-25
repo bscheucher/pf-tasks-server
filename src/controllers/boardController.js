@@ -17,8 +17,8 @@ export const getBoards = async (req, res) => {
     const boards = await findBoards(userId);
     if (!boards || boards.length === 0) {
       return res
-        .status(404)
-        .json({ message: "No boards found for this user." });
+        .status(201)
+        .json({ message: "No boards found for this user." }, []);
     }
     res.json(boards);
   } catch (err) {
@@ -28,7 +28,7 @@ export const getBoards = async (req, res) => {
 };
 
 export const addBoard = async (req, res) => {
-  const {userId} = req.params;
+  const { userId } = req.params;
   console.log(`[addBoard] Called for user ID: ${userId}`);
 
   if (!userId) {
